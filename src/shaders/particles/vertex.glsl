@@ -11,7 +11,9 @@ varying vec3 vColor;
 void main()
 {
     // Mixed position
-    float noise = snoise(position);
+    float noiseOrigin = snoise(position * 0.2);
+    float noiseTarget = snoise(aPositionTarget * 0.2);
+    float noise = mix(noiseOrigin, noiseTarget, uProgress);
     noise = smoothstep(-1.0, 1.0, noise);
     
     float duration = 0.4;
